@@ -73,14 +73,17 @@ function createWindow() {
 
 function setupBlockerInterceptor() {
   session.defaultSession.webRequest.onBeforeRequest((details, callback) => {
-    if (details.resourceType === 'mainFrame' && blocker.isBlocked(details.url)) {
-      blocker.recordBlocked();
-      callback({
-        redirectURL: `file://${path.join(__dirname, 'src', 'blocked', 'blocked.html')}?url=${encodeURIComponent(details.url)}`
-      });
-    } else {
-      callback({});
+    if (details.resourceType === 'mainFrame') {
+      const blocked = blocker.isBlocked(details.url);
+      if (blocked) {
+        blocker.recordBlocked();
+        callback({
+          redirectURL: `file://${path.join(__dirname, 'src', 'blocked', 'blocked.html')}?url=${encodeURIComponent(details.url)}&reason=${blocked}`
+        });
+        return;
+      }
     }
+    callback({});
   });
 }
 
