@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data:;">
+  <link rel="stylesheet" href="reports.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div id="reports-page">
+    <header>
+      <h1>Study Reports</h1>
+      <p class="subtitle">Your learning activity at a glance</p>
+    </header>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <span class="stat-value" id="stat-study-time">0h 0m</span>
+        <span class="stat-label">Study Time Today</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value" id="stat-focus-sessions">0</span>
+        <span class="stat-label">Focus Sessions</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value" id="stat-blocked">0</span>
+        <span class="stat-label">Distractions Blocked</span>
+      </div>
+    </div>
+
+    <div class="charts-row">
+      <div class="chart-card">
+        <h3>Today's Breakdown</h3>
+        <div class="chart-container pie-container">
+          <canvas id="pie-chart"></canvas>
+        </div>
+      </div>
+      <div class="chart-card">
+        <h3>Study Hours This Week</h3>
+        <div class="chart-container bar-container">
+          <canvas id="bar-chart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-card">
+      <h3>Top Sites Today</h3>
+      <table id="top-sites-table">
+        <thead>
+          <tr>
+            <th>Site</th>
+            <th>Category</th>
+            <th>Time Spent</th>
+          </tr>
+        </thead>
+        <tbody id="sites-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+  <script src="reports.js"></script>
+</body>
+</html>

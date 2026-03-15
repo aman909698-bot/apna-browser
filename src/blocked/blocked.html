@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="blocked.css">
+</head>
+<body>
+  <div id="blocked-page">
+    <div class="shield">
+      <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+        <path d="M40 6L12 20v20c0 16.6 11.9 32.1 28 36 16.1-3.9 28-19.4 28-36V20L40 6z" fill="url(#shieldGrad)" stroke="rgba(255,255,255,0.1)" stroke-width="2"/>
+        <path d="M30 40l7 7 13-14" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <defs><linearGradient id="shieldGrad" x1="12" y1="6" x2="68" y2="76"><stop stop-color="#0A84FF"/><stop offset="1" stop-color="#5E5CE6"/></linearGradient></defs>
+      </svg>
+    </div>
+    <h1>Site Blocked</h1>
+    <p class="domain" id="blocked-domain"></p>
+    <p class="quote" id="quote"></p>
+    <p class="sub">Focus Mode is active. Stay on track with your studies.</p>
+    <button id="go-back" onclick="history.back()">Go Back</button>
+  </div>
+  <script>
+    const quotes = [
+      { text: "Padhai kar, Instagram baad mein!", lang: "hi" },
+      { text: "Pehle padhle, phir scroll kariyo.", lang: "hi" },
+      { text: "Sapne bade hain, toh distractions chhote rakho.", lang: "hi" },
+      { text: "Mehnat ka koi shortcut nahi hota.", lang: "hi" },
+      { text: "Aaj ki mehnat, kal ka success.", lang: "hi" },
+      { text: "Focus is your superpower. Use it.", lang: "en" },
+      { text: "The secret of getting ahead is getting started.", lang: "en" },
+      { text: "Small steps every day lead to big results.", lang: "en" },
+      { text: "Your future self will thank you for studying now.", lang: "en" },
+      { text: "Discipline is choosing what you want most over what you want now.", lang: "en" }
+    ];
+
+    const params = new URLSearchParams(window.location.search);
+    const url = params.get('url') || '';
+    try {
+      const hostname = new URL(url).hostname;
+      document.getElementById('blocked-domain').textContent = hostname;
+    } catch {
+      document.getElementById('blocked-domain').textContent = url;
+    }
+
+    const q = quotes[Math.floor(Math.random() * quotes.length)];
+    document.getElementById('quote').textContent = `"${q.text}"`;
+  </script>
+</body>
+</html>
