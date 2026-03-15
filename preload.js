@@ -32,5 +32,10 @@ contextBridge.exposeInMainWorld('electronAPI', {
   screenshot: {
     take: () => ipcRenderer.send('screenshot:take'),
     onDone: (cb) => ipcRenderer.on('screenshot:done', (_, filePath) => cb(filePath))
+  },
+  zoom: {
+    in: () => ipcRenderer.send('zoom:in'),
+    out: () => ipcRenderer.send('zoom:out'),
+    reset: () => ipcRenderer.send('zoom:reset')
   }
 });

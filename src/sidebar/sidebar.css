@@ -4,21 +4,20 @@
   box-sizing: border-box;
 }
 
-body {
+html, body {
   font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   background: #0d0d1f;
   color: #e4e6f0;
-  height: 100vh;
+  height: 100%;
+  width: 100%;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
 }
 
 #sidebar {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  max-height: 100vh;
+  height: 100%;
+  width: 100%;
   border-left: 1px solid rgba(108, 92, 231, 0.06);
   animation: sideSlide 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
@@ -30,7 +29,6 @@ body {
   to { opacity: 1; transform: translateX(0); }
 }
 
-/* Subtle gradient line on left border */
 #sidebar::before {
   content: '';
   position: absolute;
@@ -40,10 +38,11 @@ body {
   width: 1px;
   background: linear-gradient(180deg, #6c5ce7, #00cec9, #6c5ce7);
   opacity: 0.15;
+  z-index: 1;
 }
 
 .sidebar-header {
-  padding: 16px 18px 14px;
+  padding: 12px 14px 10px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
   display: flex;
   align-items: center;
@@ -52,14 +51,15 @@ body {
 }
 
 .header-icon {
-  width: 34px;
-  height: 34px;
-  border-radius: 11px;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
   background: linear-gradient(135deg, rgba(108, 92, 231, 0.12), rgba(0, 206, 201, 0.08));
   display: flex;
   align-items: center;
   justify-content: center;
   animation: iconFloat 3s ease-in-out infinite;
+  flex-shrink: 0;
 }
 
 @keyframes iconFloat {
@@ -68,7 +68,7 @@ body {
 }
 
 .sidebar-header h2 {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   background: linear-gradient(135deg, #a78bfa, #00cec9);
   -webkit-background-clip: text;
@@ -79,8 +79,8 @@ body {
 
 .quick-actions {
   display: flex;
-  gap: 6px;
-  padding: 12px 14px;
+  gap: 4px;
+  padding: 8px 10px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
   flex-shrink: 0;
 }
@@ -90,13 +90,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
-  padding: 9px 4px;
+  gap: 4px;
+  padding: 7px 4px;
   background: rgba(255, 255, 255, 0.025);
   border: 1px solid rgba(255, 255, 255, 0.04);
-  border-radius: 10px;
+  border-radius: 8px;
   color: #636880;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -130,20 +130,20 @@ body {
 
 .translate-row {
   display: flex;
-  gap: 6px;
-  padding: 8px 14px;
+  gap: 4px;
+  padding: 6px 10px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
   flex-shrink: 0;
 }
 
 .translate-row select {
   flex: 1;
-  height: 32px;
+  height: 30px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 8px;
   color: #a0a8c0;
-  font-size: 11px;
+  font-size: 10px;
   padding: 0 8px;
   outline: none;
   font-family: inherit;
@@ -168,17 +168,18 @@ body {
 .translate-btn {
   width: auto !important;
   flex: 0 0 auto !important;
-  padding: 6px 12px !important;
+  padding: 5px 10px !important;
+  font-size: 10px !important;
 }
 
 #chat-messages {
-  flex: 1;
+  flex: 1 1 0;
   min-height: 0;
   overflow-y: auto;
-  padding: 14px 14px;
+  padding: 10px 10px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   scrollbar-width: thin;
   scrollbar-color: rgba(108, 92, 231, 0.1) transparent;
 }
@@ -194,10 +195,10 @@ body {
 
 .message {
   max-width: 92%;
-  padding: 11px 15px;
-  border-radius: 14px;
-  font-size: 13px;
-  line-height: 1.65;
+  padding: 10px 13px;
+  border-radius: 12px;
+  font-size: 12px;
+  line-height: 1.6;
   word-wrap: break-word;
   animation: msgPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
@@ -213,18 +214,18 @@ body {
 
 .msg-controls {
   display: flex;
-  gap: 6px;
-  margin-top: 8px;
-  padding-top: 7px;
+  gap: 5px;
+  margin-top: 6px;
+  padding-top: 6px;
   border-top: 1px solid rgba(255, 255, 255, 0.04);
 }
 
 .tts-btn {
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   border: none;
   background: rgba(255, 255, 255, 0.04);
-  border-radius: 8px;
+  border-radius: 7px;
   color: #4a4e6a;
   cursor: pointer;
   display: flex;
@@ -286,8 +287,8 @@ body {
 }
 
 .loading-dots span {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: linear-gradient(135deg, #6c5ce7, #00cec9);
   animation: dotJump 1.4s ease-in-out infinite;
@@ -303,8 +304,8 @@ body {
 
 .input-area {
   display: flex;
-  gap: 6px;
-  padding: 12px 14px 16px;
+  gap: 5px;
+  padding: 10px 10px 12px;
   border-top: 1px solid rgba(255, 255, 255, 0.04);
   align-items: center;
   flex-shrink: 0;
@@ -312,11 +313,11 @@ body {
 }
 
 .voice-btn {
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
+  border-radius: 9px;
   color: #4a4e6a;
   cursor: pointer;
   display: flex;
@@ -346,13 +347,14 @@ body {
 
 #question-input {
   flex: 1;
-  height: 36px;
+  height: 34px;
+  min-width: 0;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
+  border-radius: 9px;
   color: #c0c8e0;
-  font-size: 13px;
-  padding: 0 12px;
+  font-size: 12px;
+  padding: 0 10px;
   outline: none;
   transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: inherit;
@@ -369,11 +371,11 @@ body {
 }
 
 #btn-send {
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   background: linear-gradient(135deg, #6c5ce7, #4834b0);
   border: none;
-  border-radius: 10px;
+  border-radius: 9px;
   color: white;
   cursor: pointer;
   display: flex;

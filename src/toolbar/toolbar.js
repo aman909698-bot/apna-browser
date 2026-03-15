@@ -127,10 +127,6 @@ btnFocus.addEventListener('click', () => {
   window.electronAPI.focus.toggle();
 });
 
-window.electronAPI.focus.onStatus((active) => {
-  btnFocus.classList.toggle('focus-active', active);
-});
-
 btnSidebar.addEventListener('click', () => {
   window.electronAPI.sidebar.toggle();
 });
@@ -153,6 +149,14 @@ document.getElementById('btn-reports').addEventListener('click', () => {
   window.electronAPI.reports.open();
 });
 
+// Focus mode visual feedback
+let focusActive = false;
+window.electronAPI.focus.onStatus((active) => {
+  focusActive = active;
+  btnFocus.classList.toggle('focus-active', active);
+  btnFocus.title = active ? 'Focus Mode ON — Only edu sites allowed' : 'Focus Mode — Block Distractions';
+});
+
 document.addEventListener('keydown', (e) => {
   if (e.ctrlKey || e.metaKey) {
     switch (e.key) {
@@ -161,6 +165,9 @@ document.addEventListener('keydown', (e) => {
       case 'l': e.preventDefault(); urlBar.focus(); break;
       case 'b': e.preventDefault(); window.electronAPI.sidebar.toggle(); break;
       case 'r': e.preventDefault(); window.electronAPI.nav.reload(); break;
+      case '=': case '+': e.preventDefault(); window.electronAPI.zoom.in(); break;
+      case '-': e.preventDefault(); window.electronAPI.zoom.out(); break;
+      case '0': e.preventDefault(); window.electronAPI.zoom.reset(); break;
     }
     if (e.shiftKey && e.key === 'S') {
       e.preventDefault();

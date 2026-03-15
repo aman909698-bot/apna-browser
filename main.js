@@ -67,6 +67,26 @@ function createWindow() {
     tabManager.handleResize();
   });
 
+  // Zoom controls
+  ipcMain.on('zoom:in', () => {
+    const tab = tabManager.tabs.get(tabManager.activeTabId);
+    if (tab) {
+      const current = tab.view.webContents.getZoomLevel();
+      tab.view.webContents.setZoomLevel(current + 0.5);
+    }
+  });
+  ipcMain.on('zoom:out', () => {
+    const tab = tabManager.tabs.get(tabManager.activeTabId);
+    if (tab) {
+      const current = tab.view.webContents.getZoomLevel();
+      tab.view.webContents.setZoomLevel(current - 0.5);
+    }
+  });
+  ipcMain.on('zoom:reset', () => {
+    const tab = tabManager.tabs.get(tabManager.activeTabId);
+    if (tab) tab.view.webContents.setZoomLevel(0);
+  });
+
   setupBlockerInterceptor();
   seedDemoDataIfNeeded();
 }
