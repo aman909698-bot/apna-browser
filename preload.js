@@ -28,5 +28,9 @@ contextBridge.exposeInMainWorld('electronAPI', {
   reports: {
     open: () => ipcRenderer.send('reports:open'),
     getSummary: () => ipcRenderer.invoke('activity:get-summary')
+  },
+  screenshot: {
+    take: () => ipcRenderer.send('screenshot:take'),
+    onDone: (cb) => ipcRenderer.on('screenshot:done', (_, filePath) => cb(filePath))
   }
 });

@@ -139,6 +139,16 @@ window.electronAPI.sidebar.onToggled((open) => {
   btnSidebar.classList.toggle('sidebar-active', open);
 });
 
+document.getElementById('btn-screenshot').addEventListener('click', () => {
+  window.electronAPI.screenshot.take();
+});
+
+window.electronAPI.screenshot.onDone((filePath) => {
+  const btn = document.getElementById('btn-screenshot');
+  btn.style.color = '#00cec9';
+  setTimeout(() => { btn.style.color = ''; }, 1500);
+});
+
 document.getElementById('btn-reports').addEventListener('click', () => {
   window.electronAPI.reports.open();
 });
@@ -151,6 +161,10 @@ document.addEventListener('keydown', (e) => {
       case 'l': e.preventDefault(); urlBar.focus(); break;
       case 'b': e.preventDefault(); window.electronAPI.sidebar.toggle(); break;
       case 'r': e.preventDefault(); window.electronAPI.nav.reload(); break;
+    }
+    if (e.shiftKey && e.key === 'S') {
+      e.preventDefault();
+      window.electronAPI.screenshot.take();
     }
   }
 });

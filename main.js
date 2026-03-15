@@ -1,5 +1,6 @@
-const { app, BaseWindow, WebContentsView, ipcMain, session } = require('electron');
+const { app, BaseWindow, WebContentsView, ipcMain, session, globalShortcut, dialog } = require('electron');
 const path = require('path');
+const fs = require('fs');
 const TabManager = require('./lib/tab-manager');
 const blocker = require('./lib/blocker');
 const activityTracker = require('./lib/activity-tracker');
@@ -119,10 +120,32 @@ ipcMain.on('sidebar:ask', async (_, payload) => {
     result = await aiService.summarize(pageText);
   } else if (payload.action === 'explain') {
     result = await aiService.explain(pageText);
+  } else if (payload.action === 'translate') {
+    result = await aiService.translate(pageText, payload.language);
   } else {
     result = await aiService.ask(pageText, payload.question);
   }
   sidebarView.webContents.send('sidebar:response', result);
+});
+
+ipcMain.on('screenshot:take', async () => {
+  try {
+    const tab = tabManager.tabs.get(tabManager.activeTabId);
+    if (!tab) return;
+    const image = await tab.view.webContents.capturePage();
+    const png = image.toPNG();
+    const { filePath } = await dialog.showSaveDialog(mainWindow, {
+      title: 'Save Screenshot',
+      defaultPath: path.join(app.getPath('pictures'), `apna-browser-${Date.now()}.png`),
+      filters: [{ name: 'PNG Image', extensions: ['png'] }]
+    });
+    if (filePath) {
+      fs.writeFileSync(filePath, png);
+      toolbarView.webContents.send('screenshot:done', filePath);
+    }
+  } catch (err) {
+    console.error('Screenshot error:', err);
+  }
 });
 
 ipcMain.on('reports:open', () => {

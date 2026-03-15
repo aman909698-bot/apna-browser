@@ -145,6 +145,17 @@ document.getElementById('btn-ask-page').addEventListener('click', () => {
   questionInput.placeholder = 'Type your question about this page...';
 });
 
+document.getElementById('btn-translate').addEventListener('click', () => {
+  const lang = document.getElementById('translate-lang').value;
+  if (!lang) {
+    addMessage('Please select a language first.', 'error');
+    return;
+  }
+  addMessage(`Translate this page to ${lang}`, 'user');
+  showLoading();
+  window.electronAPI.sidebar.ask({ action: 'translate', language: lang });
+});
+
 document.getElementById('btn-send').addEventListener('click', sendQuestion);
 questionInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') sendQuestion();
