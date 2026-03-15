@@ -5,8 +5,10 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-  background: linear-gradient(135deg, #0a0e27 0%, #1a1040 50%, #0d1435 100%);
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: #13132b;
+  background-image:
+    radial-gradient(ellipse at 50% 40%, rgba(108, 92, 231, 0.08) 0%, transparent 50%);
   color: #e4e6f0;
   height: 100vh;
   display: flex;
@@ -18,23 +20,29 @@ body {
   text-align: center;
   max-width: 480px;
   padding: 40px;
+  animation: blockedAppear 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes blockedAppear {
+  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 .shield {
   margin-bottom: 28px;
-  animation: shieldPulse 2s ease-in-out infinite;
+  animation: shieldFloat 3s ease-in-out infinite;
 }
 
-@keyframes shieldPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+@keyframes shieldFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
 
 h1 {
   font-size: 32px;
   font-weight: 700;
   margin-bottom: 8px;
-  background: linear-gradient(135deg, #0A84FF, #5E5CE6);
+  background: linear-gradient(135deg, #6c5ce7, #0984e3);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -45,9 +53,10 @@ h1 {
   color: #ff6b6b;
   margin-bottom: 28px;
   font-weight: 500;
-  padding: 6px 16px;
-  background: rgba(255, 107, 107, 0.08);
-  border-radius: 8px;
+  padding: 6px 18px;
+  background: rgba(255, 107, 107, 0.06);
+  border: 1px solid rgba(255, 107, 107, 0.1);
+  border-radius: 10px;
   display: inline-block;
 }
 
@@ -62,24 +71,30 @@ h1 {
 
 .sub {
   font-size: 14px;
-  color: #6b7089;
+  color: #5a5e78;
   margin-bottom: 32px;
 }
 
 #go-back {
-  padding: 10px 32px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 10px;
+  padding: 11px 34px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
   color: #a0a4b8;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: inherit;
 }
 
 #go-back:hover {
-  background: rgba(255, 255, 255, 0.14);
+  background: rgba(108, 92, 231, 0.1);
+  border-color: rgba(108, 92, 231, 0.2);
   color: #e4e6f0;
+  transform: translateY(-1px);
+}
+
+#go-back:active {
+  transform: scale(0.97);
 }

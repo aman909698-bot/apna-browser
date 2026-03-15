@@ -5,17 +5,26 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-  background: linear-gradient(135deg, #0a0e27 0%, #1a1040 40%, #0d1435 100%);
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: #13132b;
+  background-image:
+    radial-gradient(ellipse at 30% 30%, rgba(108, 92, 231, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 70%, rgba(9, 132, 227, 0.04) 0%, transparent 50%);
   color: #e4e6f0;
   min-height: 100vh;
   overflow-y: auto;
 }
 
 #reports-page {
-  max-width: 900px;
+  max-width: 920px;
   margin: 0 auto;
-  padding: 40px 24px 60px;
+  padding: 40px 28px 60px;
+  animation: pageLoad 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes pageLoad {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 header {
@@ -25,14 +34,14 @@ header {
 header h1 {
   font-size: 28px;
   font-weight: 700;
-  background: linear-gradient(135deg, #0A84FF, #5E5CE6);
+  background: linear-gradient(135deg, #6c5ce7, #0984e3);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .subtitle {
-  color: #6b7089;
+  color: #5a5e78;
   font-size: 14px;
   margin-top: 4px;
 }
@@ -45,27 +54,51 @@ header h1 {
 }
 
 .stat-card {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 14px;
-  padding: 22px 20px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 16px;
+  padding: 24px 20px;
   text-align: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #6c5ce7, #0984e3);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.stat-card:hover::before {
+  opacity: 1;
 }
 
 .stat-value {
   display: block;
-  font-size: 30px;
+  font-size: 32px;
   font-weight: 700;
   color: #e4e6f0;
   margin-bottom: 6px;
 }
 
 .stat-label {
-  font-size: 12px;
-  color: #6b7089;
+  font-size: 11px;
+  color: #5a5e78;
   text-transform: uppercase;
-  letter-spacing: 0.8px;
-  font-weight: 500;
+  letter-spacing: 1px;
+  font-weight: 600;
 }
 
 .charts-row {
@@ -76,18 +109,23 @@ header h1 {
 }
 
 .chart-card {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 16px;
   padding: 22px;
+  transition: transform 0.3s;
+}
+
+.chart-card:hover {
+  transform: translateY(-2px);
 }
 
 .chart-card h3 {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
-  color: #8b8fa3;
+  color: #5a5e78;
   text-transform: uppercase;
-  letter-spacing: 0.8px;
+  letter-spacing: 1px;
   margin-bottom: 18px;
 }
 
@@ -107,18 +145,18 @@ header h1 {
 }
 
 .table-card {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 16px;
   padding: 22px;
 }
 
 .table-card h3 {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
-  color: #8b8fa3;
+  color: #5a5e78;
   text-transform: uppercase;
-  letter-spacing: 0.8px;
+  letter-spacing: 1px;
   margin-bottom: 16px;
 }
 
@@ -131,18 +169,26 @@ th {
   text-align: left;
   font-size: 11px;
   font-weight: 600;
-  color: #5a5e73;
+  color: #44475a;
   text-transform: uppercase;
   letter-spacing: 0.8px;
   padding: 8px 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 }
 
 td {
   padding: 10px 12px;
   font-size: 13px;
-  color: #c0c4d6;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  color: #b0b4cc;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+tr {
+  transition: background 0.2s;
+}
+
+tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
 }
 
 tr:last-child td {
@@ -153,23 +199,23 @@ tr:last-child td {
   display: inline-block;
   padding: 3px 10px;
   border-radius: 6px;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .cat-educational {
-  background: rgba(48, 209, 88, 0.12);
-  color: #30d158;
+  background: rgba(0, 206, 201, 0.1);
+  color: #00cec9;
 }
 
 .cat-neutral {
-  background: rgba(10, 132, 255, 0.12);
-  color: #0A84FF;
+  background: rgba(108, 92, 231, 0.1);
+  color: #a78bfa;
 }
 
 .cat-blocked {
-  background: rgba(255, 59, 48, 0.12);
+  background: rgba(255, 107, 107, 0.1);
   color: #ff6b6b;
 }
