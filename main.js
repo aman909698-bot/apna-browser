@@ -18,7 +18,7 @@ function createWindow() {
     minWidth: 800,
     minHeight: 600,
     title: 'Apna Browser',
-    backgroundColor: '#13132b',
+    backgroundColor: '#0a0a1a',
     autoHideMenuBar: true
   });
 

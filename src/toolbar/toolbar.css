@@ -6,20 +6,20 @@
 
 body {
   font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  background: #1b1b2f;
+  background: #0d0d1f;
   overflow: hidden;
   user-select: none;
   -webkit-app-region: drag;
 }
 
+/* ===== TAB STRIP ===== */
 #tab-strip {
   display: flex;
   align-items: flex-end;
   height: 40px;
-  padding: 0 10px;
-  gap: 0;
+  padding: 0 12px;
+  background: #0a0a18;
   -webkit-app-region: drag;
-  background: #16162a;
 }
 
 #tabs-container {
@@ -40,42 +40,54 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  min-width: 120px;
-  max-width: 220px;
+  min-width: 130px;
+  max-width: 230px;
   height: 34px;
   padding: 0 10px 0 14px;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.03);
   border-radius: 10px 10px 0 0;
-  color: #7a7f9a;
+  color: #5a5e78;
   font-size: 12.5px;
   cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   flex-shrink: 0;
   position: relative;
   border: 1px solid transparent;
   border-bottom: none;
+  animation: tabAppear 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes tabAppear {
+  from { opacity: 0; transform: translateY(5px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .tab:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: #b0b4cc;
+  background: rgba(255, 255, 255, 0.06);
+  color: #a0a8c0;
 }
 
 .tab.active {
-  background: #1b1b2f;
-  color: #e8eaf4;
-  border-color: rgba(255, 255, 255, 0.06);
+  background: #0d0d1f;
+  color: #e4e6f0;
+  border-color: rgba(108, 92, 231, 0.08);
 }
 
 .tab.active::after {
   content: '';
   position: absolute;
   bottom: 0;
-  left: 0;
-  right: 0;
+  left: 8px;
+  right: 8px;
   height: 2px;
-  background: linear-gradient(90deg, #6c5ce7, #0984e3);
+  background: linear-gradient(90deg, #6c5ce7, #00cec9);
   border-radius: 2px 2px 0 0;
+  animation: tabLineGrow 0.3s ease-out;
+}
+
+@keyframes tabLineGrow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
 }
 
 .tab-title {
@@ -89,12 +101,12 @@ body {
 }
 
 .tab-loading {
-  width: 12px;
-  height: 12px;
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  width: 13px;
+  height: 13px;
+  border: 2px solid rgba(108, 92, 231, 0.15);
   border-top-color: #6c5ce7;
   border-radius: 50%;
-  animation: spin 0.7s linear infinite;
+  animation: spin 0.6s linear infinite;
   flex-shrink: 0;
 }
 
@@ -107,42 +119,41 @@ body {
   height: 20px;
   border: none;
   background: none;
-  color: #555;
-  font-size: 15px;
+  color: transparent;
+  font-size: 14px;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   transition: all 0.2s ease;
   line-height: 1;
-  opacity: 0;
 }
 
-.tab:hover .tab-close,
-.tab.active .tab-close {
-  opacity: 1;
+.tab:hover .tab-close {
+  color: #5a5e78;
 }
 
 .tab-close:hover {
-  background: rgba(255, 80, 80, 0.25);
-  color: #ff6b6b;
+  background: rgba(255, 80, 80, 0.2);
+  color: #ff6b6b !important;
 }
 
+/* + button right next to tabs */
 #new-tab-btn {
   width: 30px;
   height: 30px;
   border: none;
-  background: rgba(255, 255, 255, 0.04);
-  color: #6b7089;
+  background: transparent;
+  color: #4a4e6a;
   font-size: 18px;
   cursor: pointer;
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   flex-shrink: 0;
   -webkit-app-region: no-drag;
   margin-left: 4px;
@@ -150,24 +161,25 @@ body {
 }
 
 #new-tab-btn:hover {
-  background: rgba(108, 92, 231, 0.15);
-  color: #6c5ce7;
-  transform: scale(1.1);
+  background: rgba(108, 92, 231, 0.12);
+  color: #a78bfa;
+  transform: scale(1.15) rotate(90deg);
 }
 
 #new-tab-btn:active {
-  transform: scale(0.95);
+  transform: scale(0.9);
 }
 
+/* ===== NAV BAR ===== */
 #nav-bar {
   display: flex;
   align-items: center;
   height: 42px;
-  padding: 0 10px;
-  gap: 4px;
+  padding: 0 12px;
+  gap: 3px;
   -webkit-app-region: no-drag;
-  background: #1b1b2f;
-  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  background: #0d0d1f;
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
 }
 
 .nav-btn {
@@ -175,66 +187,66 @@ body {
   height: 32px;
   border: none;
   background: none;
-  color: #6b7089;
+  color: #4a4e6a;
   cursor: pointer;
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   flex-shrink: 0;
+  position: relative;
 }
 
 .nav-btn:hover {
-  background: rgba(255, 255, 255, 0.07);
-  color: #b0b4cc;
+  background: rgba(255, 255, 255, 0.05);
+  color: #a0a8c0;
 }
 
 .nav-btn:active {
-  transform: scale(0.92);
+  transform: scale(0.88);
 }
 
 .nav-btn.focus-active {
   color: #00cec9;
-  background: rgba(0, 206, 201, 0.1);
-  box-shadow: 0 0 16px rgba(0, 206, 201, 0.2);
-  animation: focusPulse 2s ease-in-out infinite;
+  background: rgba(0, 206, 201, 0.08);
+  animation: focusGlow 2s ease-in-out infinite;
 }
 
-@keyframes focusPulse {
-  0%, 100% { box-shadow: 0 0 8px rgba(0, 206, 201, 0.15); }
-  50% { box-shadow: 0 0 20px rgba(0, 206, 201, 0.3); }
+@keyframes focusGlow {
+  0%, 100% { box-shadow: 0 0 6px rgba(0, 206, 201, 0.1); }
+  50% { box-shadow: 0 0 16px rgba(0, 206, 201, 0.25); }
 }
 
 .nav-btn.sidebar-active {
   color: #6c5ce7;
-  background: rgba(108, 92, 231, 0.12);
+  background: rgba(108, 92, 231, 0.1);
 }
 
 #url-bar {
   flex: 1;
   height: 32px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.04);
   border-radius: 10px;
-  color: #d1d5e8;
+  color: #c0c8e0;
   font-size: 13px;
   padding: 0 14px;
   outline: none;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: inherit;
 }
 
 #url-bar:focus {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(108, 92, 231, 0.5);
-  box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1), 0 2px 12px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(108, 92, 231, 0.35);
+  box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.06), 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
 #url-bar::placeholder {
-  color: #3d4157;
+  color: #2a2e42;
 }
 
 #url-bar::selection {
-  background: rgba(108, 92, 231, 0.4);
+  background: rgba(108, 92, 231, 0.35);
 }

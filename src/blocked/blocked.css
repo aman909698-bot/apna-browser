@@ -6,93 +6,103 @@
 
 body {
   font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  background: #13132b;
-  background-image:
-    radial-gradient(ellipse at 50% 40%, rgba(108, 92, 231, 0.08) 0%, transparent 50%);
+  background: #0a0a1a;
+  background-image: radial-gradient(ellipse at 50% 40%, rgba(108, 92, 231, 0.06) 0%, transparent 60%);
   color: #e4e6f0;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 #blocked-page {
   text-align: center;
   max-width: 480px;
   padding: 40px;
-  animation: blockedAppear 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: blockedIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-@keyframes blockedAppear {
-  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+@keyframes blockedIn {
+  from { opacity: 0; transform: scale(0.9) translateY(20px); }
   to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 .shield {
   margin-bottom: 28px;
-  animation: shieldFloat 3s ease-in-out infinite;
+  animation: shieldFloat 4s ease-in-out infinite;
+  filter: drop-shadow(0 8px 20px rgba(108, 92, 231, 0.2));
 }
 
 @keyframes shieldFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-8px) rotate(1deg); }
+  75% { transform: translateY(-4px) rotate(-1deg); }
 }
 
 h1 {
   font-size: 32px;
   font-weight: 700;
-  margin-bottom: 8px;
-  background: linear-gradient(135deg, #6c5ce7, #0984e3);
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, #6c5ce7, #00cec9);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .domain {
-  font-size: 15px;
+  font-size: 14px;
   color: #ff6b6b;
   margin-bottom: 28px;
   font-weight: 500;
-  padding: 6px 18px;
-  background: rgba(255, 107, 107, 0.06);
-  border: 1px solid rgba(255, 107, 107, 0.1);
+  padding: 7px 20px;
+  background: rgba(255, 107, 107, 0.05);
+  border: 1px solid rgba(255, 107, 107, 0.08);
   border-radius: 10px;
   display: inline-block;
+  font-family: monospace;
 }
 
 .quote {
   font-size: 20px;
   font-weight: 500;
-  color: #d1d5e8;
+  color: #c0c8e0;
   margin-bottom: 16px;
   line-height: 1.5;
   font-style: italic;
+  animation: quoteGlow 3s ease-in-out infinite;
+}
+
+@keyframes quoteGlow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
 }
 
 .sub {
   font-size: 14px;
-  color: #5a5e78;
+  color: #4a4e6a;
   margin-bottom: 32px;
 }
 
 #go-back {
-  padding: 11px 34px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 12px 36px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 12px;
-  color: #a0a4b8;
+  color: #a0a8c0;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: inherit;
 }
 
 #go-back:hover {
-  background: rgba(108, 92, 231, 0.1);
-  border-color: rgba(108, 92, 231, 0.2);
+  background: rgba(108, 92, 231, 0.08);
+  border-color: rgba(108, 92, 231, 0.15);
   color: #e4e6f0;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
 #go-back:active {
